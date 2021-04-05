@@ -43,6 +43,20 @@
             });
 
             console.log(test3.$data)
+
+            var test4 = new Vue({
+                el: "#test4",
+                data: {
+                    name: '홍길동',
+                    age: 30
+                },
+                methods: {
+                    user_info: function () {
+                        return 'The name is ' + this.name + ', and the age is ' + this.age + '.';
+                    }
+                }
+            });
+
         }
     </script>
 </head>
@@ -70,6 +84,9 @@
         <h3>{{boolean3}}</h3>
         <h3>{{array3}}</h3>
         <h3>{{object3}}</h3>
+    </div>
+    <div id="test4">
+        <h3>{{user_info()}}</h3>
     </div>
 </body>
 
