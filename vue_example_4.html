@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                data: {
+                    a1: 100,
+                    a2: 200,
+                    a3: '',
+                },
+                methods: {
+                    test_method: function () {
+                        console.log('test_method');
+                        return parseInt(this.a1) + parseInt(this.a2);
+                    },
+                    setValue: function () {
+                        this.a1 = 1000;
+                        this.a2 = 2000;
+                    },
+                    getRandomMethod: function () {
+                        return Math.random();
+                    }
+                },
+                computed: {
+                    test_computed: function () {
+                        console.log('test_computed');
+                        return this.a1 + this.a2;
+                    },
+                    getRandomComputed: function () {
+                        return Math.random();
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        input1: <input type='text' v-model='a1' /><br />
+        input2: <input type='text' v-model='a2' /><br />
+        <h3>{{a1}}</h3>
+        <h3>{{a2}}</h3>
+        <h3>a1+a2 : {{a1+a2}}</h3>
+        <h3>test_method a1+a2 : {{test_method()}}</h3>
+        <h3>test_method a1+a2 : {{test_method()}}</h3>
+        <h3>test_method a1+a2 : {{test_method()}}</h3>
+        <h3>test_computed a1+a2 : {{test_computed}}</h3>
+        <h3>test_computed a1+a2 : {{test_computed}}</h3>
+        <h3>test_computed a1+a2 : {{test_computed}}</h3>
+
+        <button type="button" v-on:click="setValue"> value change </button>
+
+        <h3>get random method: {{getRandomMethod()}}</h3>
+        <h3>get random method: {{getRandomMethod()}}</h3>
+        <h3>get random method: {{getRandomMethod()}}</h3>
+
+        <h3>get random computed: {{getRandomComputed}}</h3>
+        <h3>get random computed: {{getRandomComputed}}</h3>
+        <h3>get random computed: {{getRandomComputed}}</h3>
+    </div>
+</body>
+
+</html>
