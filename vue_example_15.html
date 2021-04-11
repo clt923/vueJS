@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                data: {
+                    bgcolorValue: 'red',
+                    colorValue: 'yellow',
+                    styleValue: {
+                        backgroundColor: 'red',
+                        color: 'blue'
+                    }
+                },
+                methods: {
+                    setInlineStyle: function () {
+                        this.bgcolorValue = 'yellow'
+                        this.colorValue = 'red'
+                    },
+                    setStyleValue: function () {
+                        this.styleValue = {
+                            backgroundColor: 'blue',
+                            color: 'red'
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        <h3 style='background-color:red; color:yellow'>문자열</h3>
+        <h3 v-bind:style='{backgroundColor:bgcolorValue, color: colorValue}'>문자열</h3>
+        <button type='button' v-on:click='setInlineStyle'>inline css 변경</button>
+        <h3 v-bind:style='styleValue'>문자열</h3>
+        <button type='button' v-on:click='setStyleValue'>inline css 변경</button>
+    </div>
+</body>
+
+</html>

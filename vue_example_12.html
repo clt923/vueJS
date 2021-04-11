@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- computed watch -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                data: {
+                    data1: 'aaa',
+                    data2: 'bbb',
+                },
+                computed: {
+                    data3: {
+                        get: function () {
+                            return this.data1 + "," + this.data2;
+                        },
+                        set: function (newVal) {
+                            var list = newVal.split(",");
+                            if (list.length > 1) {
+                                this.data1 = list[0];
+                                this.data2 = list[1];
+                            }
+                        }
+                    }
+                }
+
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        input1: <input type='text' v-model='data1' /><br />
+        input2: <input type='text' v-model='data2' /><br />
+        input3: <input type='text' v-model='data3' /><br />
+
+    </div>
+</body>
+
+</html>
