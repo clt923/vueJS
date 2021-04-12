@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- event modifier -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                data: {
+
+                },
+                methods: {
+                    method1: function () {
+                        alert('method1')
+                    },
+                    method2: function () {
+                        alert('method2')
+                    },
+                    method3: function () {
+                        alert('method3')
+                    }
+                }
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        <div class=box @click=method1>
+            <button type=button @click='method2'>button</button>
+            <button type=button @click.stop='method2'>button 2</button>
+
+            <a @click.prevent href='http://www.softcampus.co.kr'>softcampus1</a>
+            <a @click=method1 href='http://www.softcampus.co.kr'>softcampus2</a>
+            <a @click.prevent=method1 href='http://www.softcampus.co.kr'>softcampus3</a>
+
+            <div @click.capture='method3' class='box'>
+                <button type=button @click=method2>method 2 button capture method 3</button>
+            </div>
+            <div @click.self='method3' class='box'>
+                <button type=button @click=method2>method 2 button self method 3</button>
+            </div>
+            <div @click.once='method3' class='box'>
+                method 3 click.once
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

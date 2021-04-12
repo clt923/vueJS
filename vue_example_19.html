@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- event modifier -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 300px;
+            border: 1px solid black;
+        }
+    </style>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                data: {
+                    a1: 100,
+                    a3: 100,
+                    a4: 100,
+                    a7: 100
+                },
+                methods: {
+                    setA1: function () {
+                        this.a1 = this.a1 == 100 ? 200 : 100;
+                        // alert(this.a1);
+                    },
+                    setA3: function () {
+                        this.a3 = this.a3 == 100 ? 200 : 100;
+                    },
+                    setA4: function () {
+                        this.a4 = this.a4 == 100 ? 200 : 100;
+                    },
+                    setA7: function () {
+                        this.a7 = this.a7 == 100 ? 200 : 100;
+                    },
+                }
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        <div class=box>
+            <h3>a1 is {{a1}}.</h3>
+            <h3 v-if='a1 == 100'>a1 is 100.</h3>
+            <h3 v-if='a1 == 200'>a1 is 200. [A]</h3>
+            <button type='button' v-on:click='setA1'>set A1</button>
+            <hr />
+            <h3 v-if='a1 == 200'>a1 is 200. [B]</h3>
+            <h3 v-else>a1 is NOT 200. [B]</h3>
+        </div>
+        <div v-if='a3 == 100'>
+            <h3>a3 is {{a3}}.</h3>
+            <h3>a3 is {{a3}}.</h3>
+        </div>
+        <div v-else>
+            <h3>a3 is NOT {{a3}}.</h3>
+            <h3>a3 is NOT {{a3}}.</h3>
+        </div>
+        <button type='button' v-on:click='setA3'>set A3</button>
+        <template v-if='a4 == 100'>
+            <h3>a4 is {{a4}}.</h3>
+            <h3>a4 is {{a4}}.</h3>
+        </template>
+        <template v-else>
+            <h3>a4 is NOT {{a4}}.</h3>
+            <h3>a4 is NOT {{a4}}.</h3>
+        </template>
+        <button type='button' v-on:click='setA4'>set A4</button>
+        <div class=box>
+            <!-- v-show : 일단 렌더링 후, display 속성으로 제어한다. -->
+            <h3 v-show='a7==100'>a7 is 100.</h3>
+            <h3 v-show='a7!=100'>a7 is NOT 100.</h3>
+            <button type='button' v-on:click='setA7'>set A7</button>
+        </div>
+    </div>
+</body>
+
+</html>
