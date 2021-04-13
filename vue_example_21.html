@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <style>
+        /* fade 효과의 공통부분 */
+        .fade-enter-active,
+        .fade-leave-active {
+            transition: all .5s
+        }
+
+        .fade-enter,
+        .fade-leave-to {
+            opacity: 0;
+        }
+
+        .fade-enter-to,
+        .fade-leave {
+            opacity: 1;
+        }
+
+        .bounce-enter-active {
+            animation: bounce-in .5s;
+        }
+
+        .bounce-enter-active {
+            animation: bounce-in .5s reverse;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+
+            50% {
+                transform: scale(1.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                data: {
+                    show1: true,
+                    show2: true,
+                    show3: true,
+                    status: ''
+                },
+                methods: {
+                    setShow1: function () {
+                        this.show1 = this.show1 ? false : true;
+                    },
+                    setShow2: function () {
+                        this.show2 = this.show2 ? false : true;
+                    },
+                    setShow3: function () {
+                        this.show3 = this.show3 ? false : true;
+                    },
+                    beforeEnter: function () {
+                        this.status = 'beforeEnter';
+                    },
+                    enter: function () {
+                        this.status = 'enter';
+                    },
+                    afterEnter: function () {
+                        this.status = 'afterEnter';
+                    },
+                    leave: function () {
+                        this.status = 'leave';
+                    },
+                    afterLeave: function () {
+                        this.status = 'afterLeave';
+                    },
+                    leaveCancelled: function () {
+                        this.status = 'leaveCancelled';
+                    },
+                    enterCancelled: function () {
+                        this.status = 'enterCancelled';
+                    },
+                    //leave
+                    //afterLeave
+                    //leaveCancelled
+                }
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        <transition name='fade'>
+            <h3 v-if='show1'>문자열</h3>
+        </transition>
+        <button type='button' @click='setShow1'>show1</button>
+        <hr />
+        <transition name='bounce'>
+            <h3 v-if='show2'>문자열 문자열 문자열 문자열 문자열 문자열 문자열 문자열 문자열 문자열 </h3>
+        </transition>
+        <button type='button' @click='setShow2'>show2</button>
+        <hr />
+        <transition name='fade' @before-enter='beforeEnter' @enter='enter' @after-enter='afterEnter'
+            @enter-cancelled='enterCancelled' @before-leave='beforeEnter' @leave='leave' @after-leave='afterLeave'>
+            <h3 v-if='show3'>문자열 3</h3>
+        </transition>
+        <button type='button' @click='setShow3'>show3</button>
+        <h3>staus : {{status}}</h3>
+    </div>
+</body>
+
+</html>
