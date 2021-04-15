@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <script>
+        var homeComponent = {
+            template: '<h3>Home</h3>'
+        }
+        var page1Component = {
+            template: '<h3>Page 1: {{$route.params.data1}} </h3>'
+        }
+        var page2Component = {
+            template: '<h3>Page 2 </h3>'
+        }
+
+        var router = new VueRouter({
+            routes: [
+                {
+                    path: '/',
+                    component: homeComponent
+                },
+                {
+                    path: '/page1',
+                    component: page1Component
+                },
+                {
+                    path: '/page1/:data1',
+                    component: page1Component
+                },
+                {
+                    path: '/page2',
+                    component: page2Component
+                },
+            ]
+        })
+
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                router: router,
+                data: {
+
+                },
+                methods: {
+
+                }
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        <router-link to="/">Home </router-link>
+        <router-link to="/page1">Page1 </router-link>
+        <router-link to="/page1/test1">Page1:Test1 </router-link>
+        <router-link to="/page1/test2">Page1:Test2 </router-link>
+        <router-link to="/page2">Page2</router-link>
+
+        <!-- 링크를 누르면 보여줄 화면이 표시되는 부분 -->
+        <router-view></router-view>
+    </div>
+</body>
+
+</html>

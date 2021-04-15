@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        // 화면이 로딩되자마자 포커스가 주어지도록 하자
+        Vue.directive('focus', {
+            inserted: function (el) {
+                el.focus()
+            }
+        })
+
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                directives: {
+                    focus2: {
+                        inserted: function (el) {
+                            el.focus();
+                        }
+                    },
+                    test: {
+                        bind: function (el) {
+                            console.log('bind: ' + el);
+                        },
+                        inserted: function (el) {
+                            console.log('inserted: ' + el);
+                        },
+                        update: function (el) {
+                            console.log('update: ' + el);
+                        },
+                        // 지시자가 세팅되어 있는 HTML 태그 내부가 변경된 후
+                        componentUpdated: function (el) {
+                            console.log('componentUpdated: ' + el);
+                        },
+                        unbind: function (el) {
+                            console.log('unbind: ' + el);
+                        },
+                    },
+                    test2: {
+                        bind: function (el, binding, vnode) {
+                            console.log('el: ' + el);
+                            console.log('binding.name: ' + binding.name);
+                            console.log('binding.value: ' + binding.value);
+                            console.log('binding.arg: ' + binding.arg);
+                            console.log('binding.modifiers.a1: ' + binding.modifiers.a1);
+                            console.log('binding.modifiers.a2: ' + binding.modifiers.a2);
+                            console.log('binding.modifiers.a3: ' + binding.modifiers.a3);
+                            console.log('vnode.tag: ' + vnode.tag);
+                        },
+                    }
+                },
+                data: {
+                    str: '',
+                    data1: 'data1 value',
+                },
+                methods: {
+                    setStr: function () {
+                        this.str = 'test ###'
+                    }
+                }
+            });
+
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        <input type='text' v-focus />
+        <input type='text' v-focus2 />
+        <h3 v-test>{{str}}</h3>
+        <button type='button' @click='setStr'>str 변경</button>
+        <h3 v-test2='data1'>{{str}}</h3>
+        <h3 v-test2:arg1='data1'>{{str}}</h3>
+        <h3 v-test2:arg1.a1.a2='data1'>{{str}}</h3>
+
+
+    </div>
+</body>
+
+</html>

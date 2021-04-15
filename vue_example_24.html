@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        var myMixin = {
+            created: function () {
+                alert('Mixin created')
+            },
+            methods: {
+                test1: function () {
+                    alert('test1');
+                },
+                test2: function () {
+                    alert('test2');
+                },
+            }
+        }
+
+        // var Component = Vue.extend({
+        //     mixins: [myMixin]
+        // })
+
+        // var component = new Component();
+
+        window.onload = function () {
+            var vm1 = new Vue({
+                el: '#test1',
+                mixins: [myMixin],
+                data: {
+
+                },
+                methods: {
+
+                }
+            });
+
+            // vm1.test1();
+            // vm1.test2();
+        }
+    </script>
+</head>
+
+<body>
+    <div id='test1'>
+        <button type='button' @click='test1'>test 1</button>
+        <button type='button' @click='test2'>test 2</button>
+    </div>
+</body>
+
+</html>
